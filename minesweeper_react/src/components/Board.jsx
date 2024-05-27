@@ -1,9 +1,11 @@
 import Cell from './Cell';
 
 // Render grid of cells
-const Board = ({ data, handleCellClick, handleContextMenu }) => {
+const Board = ({ data, handleCellClick, handleContextMenu, width }) => {
   return (
-    <div className="board">
+    <div className="board" style={{
+      "--cols": width
+    }}>
       {data.map(datarow =>
         datarow.map(dataitem =>
           //React requires a unique key for each item when iterating through a list

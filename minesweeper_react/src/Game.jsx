@@ -9,22 +9,24 @@ import {
   plantMines,
   getNeighborMines
 } from './components/utilities';
+import DifficultySettings from './components/DifficultySettings';
 
 const Game = () => {
   //set fixed state values, these could be made into options later
-  const [height] = useState(8);
-  const [width] = useState(8);
-  const [mines] = useState(10);
+  const [height, setHeight] = useState(8);
+  const [width, setWidth] = useState(8);
+  const [mines, setMines] = useState(10);
   //set updateable state values
   const [gameData, setGameData] = useState([]);
   const [gameStatus, setGameStatus] = useState("Game in Progress");
   const [mineCount, setMineCount] = useState(mines);
   //key value is used to force the game board to reset
-  const [key, setKey] = useState(false); 
+  const [key, setKey] = useState(false);
 
   //render game board on load and trigger reset
   useEffect(() => {
     setGameData(initgameData(height, width, mines));
+    setMineCount(mines)
   }, [height, width, mines, key]);
 
   //populate data properties for all cells in grid
@@ -128,8 +130,16 @@ const Game = () => {
 
   return (
     <div className='game'>
+      <DifficultySettings
+        height={height}
+        setHeight={setHeight}
+        width={width}
+        setWidth={setWidth}
+        mines={mines}
+        setMines={setMines}
+      />
       <GameInfo mineCount={mineCount} gameStatus={gameStatus}/>
-      <Board data={gameData} handleCellClick={handleCellClick} handleContextMenu={handleContextMenu} />
+      <Board width={width} data={gameData} handleCellClick={handleCellClick} handleContextMenu={handleContextMenu}/>
       <button className="reset-button" onClick={resetGame}>Reset</button>
     </div>
   );

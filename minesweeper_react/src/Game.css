@@ -12,12 +12,16 @@ body {
 }
 
 .game {
-  max-width: 400px;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   padding: 20px;
 }
 
 .game-info {
+  max-width: 400px;
+  width: 100%;
   margin-bottom: 20px;
   background: #2919d9;
   padding: 7px;
@@ -31,7 +35,13 @@ body {
   display: block;
   margin-top: 15px;
 }
-
+.board {
+  --cols: 8;
+  display: grid;
+  grid-template-columns: repeat(var(--cols), auto);
+  max-width: calc(45px * var(--cols));
+  margin: 0 auto;
+}
 .win {
   background: rgb(18, 245, 18);
 }
@@ -90,4 +100,18 @@ body {
 
 .purple {
   color: purple;
+}
+
+.difficulty {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+  max-width: 400px;
+  width: 100%;
+}
+.difficulty input {
+  max-width: 400px;
+  margin: 0 auto;
+  width: 100%;
+  margin-bottom: 10px;
 }
